@@ -101,8 +101,8 @@ Walk-forward validation, 8 folds × 504 days (`date_id` 5016–9047):
 | Constant 1 (buy-and-hold) | **0.844** | 0.590 | **0.766** | – |
 | LightGBM | 0.718 | 0.365 | 0.699 | 5 / 8 |
 | Ridge | 0.519 | 0.343 | 0.520 | 2 / 8 |
-| Constant 2 (2× leverage) | 0.431 | 0.322 | 0.381 | 0 / 8 |
-| Constant 0 (cash) | 0.000 | 0.000 | 0.000 | 0 / 8 |
+| Constant 2 (2× leverage) | 0.431 | 0.322 | 0.381 | 1 / 8 |
+| Constant 0 (cash) | 0.000 | 0.000 | 0.000 | 1 / 8 |
 
 Buy-and-hold is not beaten overall. LightGBM is the strongest and most stable model; Ridge is penalised for exceeding the volatility limit (strategy volatility 23.6% vs. market 15.9%).
 
