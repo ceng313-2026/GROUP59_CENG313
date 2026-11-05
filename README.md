@@ -131,10 +131,7 @@ jupyter notebook assignment1_eda_baseline.ipynb
 | Date | Work done |
 |------|-----------|
 | 2026-10-29 | Repository created; README, `.gitignore`, `requirements.txt`, `src` package and `src/data.py` (data loading, feature groups, walk-forward splits) added. |
-| 2026-11-05 | Competition metric (`src/utils.py`) and baseline models with walk-forward evaluation (`src/models.py`) added. |
-| 2026-11-05 | Assignment 1 notebook: setup and data download via `kagglehub`, data overview, missing-value analysis. |
-| 2026-11-05 | Assignment 1 notebook: target distribution, volatility, feature–target relationships and stability over time. |
-| 2026-11-05 | Assignment 1 notebook: validation scheme, baseline results and conclusions. README updated with results. |
+| 2026-11-05 | Competition metric (`src/utils.py`) and baseline models (`src/models.py`) added. Assignment 1 notebook: data download, EDA (missing values, target distribution, volatility, feature–target relationships, stability), walk-forward validation and baseline results. README updated with results. |
 
 ## Kaggle submission history
 
