@@ -1,4 +1,9 @@
-"""Evaluation utilities for the Hull Tactical Market Prediction competition."""
+"""Evaluation utilities for the Hull Tactical Market Prediction competition.
+
+`adjusted_sharpe` re-implements the official competition metric
+(Kaggle metric `hull-competition-sharpe`) with NumPy instead of pandas.
+It returns exactly the same scores as the official code.
+"""
 
 from __future__ import annotations
 
@@ -54,17 +59,18 @@ def adjusted_sharpe(
     strat_std = strat_ret.std(ddof=1)
 
     if strat_std == 0:
-        sharpe = 0.0
-    else:
-        sharpe = strat_mean_excess / strat_std * np.sqrt(TRADING_DAYS_PER_YEAR)
+        raise ValueError("strategy volatility is zero, the score is undefined")
+    sharpe = strat_mean_excess / strat_std * np.sqrt(TRADING_DAYS_PER_YEAR)
     strat_vol = strat_std * np.sqrt(TRADING_DAYS_PER_YEAR) * 100
 
     mkt_excess = fwd - rf
     mkt_mean_excess = np.prod(1 + mkt_excess) ** (1 / n) - 1
     mkt_std = fwd.std(ddof=1)
     mkt_vol = mkt_std * np.sqrt(TRADING_DAYS_PER_YEAR) * 100
+    if mkt_vol == 0:
+        raise ValueError("market volatility is zero, the score is undefined")
 
-    excess_vol = max(0.0, strat_vol / mkt_vol - VOL_LIMIT) if mkt_vol > 0 else 0.0
+    excess_vol = max(0.0, strat_vol / mkt_vol - VOL_LIMIT)
     vol_penalty = 1 + excess_vol
 
     return_gap = max(0.0, (mkt_mean_excess - strat_mean_excess) * 100 * TRADING_DAYS_PER_YEAR)
