@@ -20,7 +20,8 @@ Course project for **CENG313 – Introduction to Data Science**.
   capital earns the risk-free rate.
 - **Evaluation metric:** A modified (volatility-adjusted) Sharpe ratio. The score is penalised when
   the strategy's volatility exceeds **1.2×** the market's volatility, and when the strategy's return
-  falls below the market's return. Re-implemented in `src/utils.py`.
+  falls below the market's return. Re-implemented in `src/utils.py` and verified against the official
+  scoring code (Kaggle metric `hull-competition-sharpe`): identical scores on 1,000 random test cases.
 - **Competition format:** Code competition (predictions are served through Kaggle's evaluation API).
   Timeline: started 15 Sep 2025, final submission deadline 15 Dec 2025, ended 16 Jun 2026.
 
@@ -132,6 +133,7 @@ jupyter notebook assignment1_eda_baseline.ipynb
 |------|-----------|
 | 2026-10-29 | Repository created; README, `.gitignore`, `requirements.txt`, `src` package and `src/data.py` (data loading, feature groups, walk-forward splits) added. |
 | 2026-11-05 | Competition metric (`src/utils.py`) and baseline models (`src/models.py`) added. Assignment 1 notebook: data download, EDA (missing values, target distribution, volatility, feature–target relationships, stability), walk-forward validation and baseline results. README updated with results. |
+| 2026-11-07 | Competition metric verified against the official Kaggle scoring code (identical scores on 1,000 random cases); zero-volatility handling aligned with the official code. |
 
 ## Kaggle submission history
 
