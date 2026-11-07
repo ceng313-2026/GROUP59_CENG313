@@ -63,6 +63,7 @@ group59_CENG313/
     ├── __init__.py
     ├── data.py      # data loading, feature groups, missing-value summary, walk-forward splits
     ├── models.py    # model interface, constant / Ridge / LightGBM baselines, walk-forward evaluation
+    ├── plots.py     # plotting helpers used in the notebooks (EDA, folds, model results)
     └── utils.py     # competition metric and evaluation helpers
 ```
 
@@ -134,6 +135,7 @@ jupyter notebook assignment1_eda_baseline.ipynb
 | 2026-10-29 | Repository created; README, `.gitignore`, `requirements.txt`, `src` package and `src/data.py` (data loading, feature groups, walk-forward splits) added. |
 | 2026-11-05 | Competition metric (`src/utils.py`) and baseline models (`src/models.py`) added. Assignment 1 notebook: data download, EDA (missing values, target distribution, volatility, feature–target relationships, stability), walk-forward validation and baseline results. README updated with results. |
 | 2026-11-07 | Competition metric verified against the official Kaggle scoring code (identical scores on 1,000 random cases); zero-volatility handling aligned with the official code. |
+| 2026-11-07 | Plotting code moved from the notebook into reusable functions in `src/plots.py`; Assignment 1 notebook updated to use them. |
 
 ## Kaggle submission history
 
