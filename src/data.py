@@ -8,6 +8,7 @@ from typing import Iterator
 
 import numpy as np
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
@@ -104,3 +105,49 @@ def walk_forward_splits(
         train_idx = np.arange(0, val_start - gap)
         val_idx = np.arange(val_start, val_end)
         yield train_idx, val_idx
+
+
+EARLY_PERIOD_END = 1006
+
+
+def duplicate_summary(df: pd.DataFrame) -> pd.Series:
+    """Count duplicated days, duplicated rows and identical feature columns."""
+    features = get_feature_columns(df)
+    other_cols = [c for c in df.columns if c != ID_COL]
+    identical = [
+        (a, b)
+        for i, a in enumerate(features)
+        for b in features[i + 1:]
+        if df[a].equals(df[b])
+    ]
+    return pd.Series({
+        "duplicated_date_ids": int(df[ID_COL].duplicated().sum()),
+        "duplicated_rows_ignoring_date_id": int(df.duplicated(subset=other_cols).sum()),
+        "identical_feature_pairs": ", ".join(f"{a}={b}" for a, b in identical) or "none",
+    })
+
+
+def preprocess(df: pd.DataFrame, start_date_id: int = EARLY_PERIOD_END) -> tuple[pd.DataFrame, list[str]]:
+    """Prepare the training data for modelling.
+
+    - sorts the rows by `date_id` (time order is required for walk-forward validation),
+    - drops the early rows before `start_date_id`, where only the binary `D*` features exist,
+    - keeps missing values: imputation and scaling are fitted inside each model on the
+      training rows only, so no information from the validation period leaks into them.
+
+    Returns the prepared frame (with a fresh index) and the list of feature columns.
+    """
+    out = df.sort_values(ID_COL)
+    out = out[out[ID_COL] >= start_date_id].reset_index(drop=True)
+    return out, get_feature_columns(out)
+
+
+def holdout_split(df: pd.DataFrame, test_size: float = 0.2) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Chronological hold-out split: the last `test_size` share of the days is the test set.
+
+    `shuffle=False` keeps the time order, so the model never sees days that come after
+    the test period starts.
+    """
+    df = df.sort_values(ID_COL)
+    train_part, test_part = train_test_split(df, test_size=test_size, shuffle=False)
+    return train_part, test_part
