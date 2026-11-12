@@ -2,6 +2,8 @@
 
 Course project for **CENG313 – Introduction to Data Science**.
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ceng313-2026/GROUP59_CENG313/blob/main/assignment1_eda_baseline.ipynb)
+
 ## Team
 
 | Name | Student ID | GitHub |
@@ -134,15 +136,15 @@ The notebooks are designed for **Google Colab**.
 
 1. Join the competition on Kaggle and accept the [competition rules](https://www.kaggle.com/competitions/hull-tactical-market-prediction/rules) (required to download the data).
 2. Create a Kaggle API token (*Kaggle → Settings → API Tokens → Generate*).
-3. Open the notebook in Colab (use the *Open in Colab* badge at the top of the notebook, or *File → Open notebook → GitHub*).
+3. Open the notebook in Colab with the *Open in Colab* badge at the top of this README (or *File → Open notebook → GitHub* and paste `ceng313-2026/GROUP59_CENG313`).
 4. In Colab, open **Secrets** (key icon on the left), add a secret named `KAGGLE_API_TOKEN` with your token, and enable notebook access.
 5. Run all cells. The setup cells clone this repository (so that `src/` can be imported) and download the data with `kagglehub`.
 
 Locally:
 
 ```bash
-git clone https://github.com/onurhayta/group59_CENG313.git
-cd group59_CENG313
+git clone https://github.com/ceng313-2026/GROUP59_CENG313.git
+cd GROUP59_CENG313
 pip install -r requirements.txt kagglehub
 export KAGGLE_API_TOKEN=<your token>
 jupyter notebook assignment1_eda_baseline.ipynb
@@ -156,6 +158,7 @@ jupyter notebook assignment1_eda_baseline.ipynb
 | 2026-11-05 | Competition metric (`src/utils.py`) and baseline models (`src/models.py`) added. Assignment 1 notebook: data download, EDA (missing values, target distribution, volatility, feature–target relationships, stability), walk-forward validation and baseline results. README updated with results. |
 | 2026-11-07 | Competition metric verified against the official Kaggle scoring code (identical scores on 1,000 random cases) and zero-volatility handling aligned with it; plotting code moved from the notebook into reusable functions in `src/plots.py` and the notebook updated to use them. |
 | 2026-11-11 | Repository renamed to `GROUP59_CENG313`; preprocessing, duplicate check and hold-out split helpers added to `src/data.py`; notebook restructured into the required sections (problem definition, data overview with dtypes and duplicates, preprocessing, held-out evaluation, conclusion) and re-run from scratch; held-out evaluation on the last 20% of the data added, with a score screenshot in `submissions/`; README updated. |
+| 2026-11-12 | Repository transferred to the course organization (`ceng313-2026/GROUP59_CENG313`); repository links in the notebook and README updated; Assignment 1 tagged as `assignment1`. |
 
 ## Kaggle score
 
